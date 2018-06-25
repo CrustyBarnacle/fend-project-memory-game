@@ -41,7 +41,11 @@ let flipped_cards = [];
 
 deck_of_cards.addEventListener('click', event => {
   const clickTarget = event.target;
-  if (clickTarget.classList.contains('card') && flipped_cards.length < 2) {
+  if (
+    clickTarget.classList.contains('card') &&
+    flipped_cards.length < 2 &&
+    !flipped_cards.includes(clickTarget)
+    ) {
     flipCard(clickTarget);
     addFlippedCard(clickTarget);
     if (flipped_cards.length === 2) {
