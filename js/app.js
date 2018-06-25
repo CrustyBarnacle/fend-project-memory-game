@@ -37,10 +37,25 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 const deck_of_cards = document.querySelector('.deck');
+let flipped_cards = [];
 
 deck_of_cards.addEventListener('click', event => {
   const clickTarget = event.target;
-  if (clickTarget.classList.contains('card')) {
-    console.log("Card clicked!");
+  if (clickTarget.classList.contains('card') && flipped_cards.length < 2) {
+    flipCard(clickTarget);
+    addFlippedCard(clickTarget);
+    if (flipped_cards.length === 2) {
+      console.log('2 cards!');
+    }
   }
 });
+
+function flipCard(clickTarget) {
+  clickTarget.classList.toggle('open');
+  clickTarget.classList.toggle('show');
+}
+
+function addFlippedCard(clickTarget) {
+  flipped_cards.push(clickTarget);
+  console.log(flipped_cards);
+}
