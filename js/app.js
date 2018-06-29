@@ -42,20 +42,26 @@ let flipped_cards = [];
 deck_of_cards.addEventListener('click', event => {
     const clickTarget = event.target;
 
-    if (
+    if (isClickValid(clickTarget)) {
+        flipCard(clickTarget);
+        addFlippedCard(clickTarget);
+
+        if (flipped_cards.length === 2) {
+            console.log('2 cards!'); // Two cards picked by player.
+            checkForMatch();
+        }
+    }
+});
+
+
+function isClickValid(clickTarget){
+    return (
         clickTarget.classList.contains('card') &&
         !clickTarget.classList.contains('match') &&
         flipped_cards.length < 2 &&
-        !flipped_cards.includes(clickTarget)) {
-            flipCard(clickTarget);
-            addFlippedCard(clickTarget);
-
-            if (flipped_cards.length === 2) {
-                console.log('2 cards!'); // Two cards picked by player.
-                checkForMatch();
-            }
-    }
-});
+        !flipped_cards.includes(clickTarget)
+    );
+}
 
 
 function flipCard(clickTarget) {
