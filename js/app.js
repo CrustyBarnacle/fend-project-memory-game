@@ -40,26 +40,49 @@ const deck_of_cards = document.querySelector('.deck');
 let flipped_cards = [];
 
 deck_of_cards.addEventListener('click', event => {
-  const clickTarget = event.target;
-  if (
-    clickTarget.classList.contains('card') &&
+    const clickTarget = event.target;
+    if (clickTarget.classList.contains('card') &&
     flipped_cards.length < 2 &&
-    !flipped_cards.includes(clickTarget)
-    ) {
-    flipCard(clickTarget);
-    addFlippedCard(clickTarget);
-    if (flipped_cards.length === 2) {
-      console.log('2 cards!');
+    !flipped_cards.includes(clickTarget)) {
+        flipCard(clickTarget);
+        addFlippedCard(clickTarget);
+        if (flipped_cards.length === 2) {
+            console.log('2 cards!'); // Two cards picked by player.
+            checkForMatch();
+        }
     }
-  }
 });
+
 
 function flipCard(clickTarget) {
   clickTarget.classList.toggle('open');
   clickTarget.classList.toggle('show');
 }
 
+
 function addFlippedCard(clickTarget) {
   flipped_cards.push(clickTarget);
   console.log(flipped_cards);
+}
+
+
+function checkForMatch() {
+    if (
+        flipped_cards[0].firstElementChild.className ===
+        flipped_cards[1].firstElementChild.className) {
+        console.log('Cards Match!');
+        flipped_cards[0].classList.toggle('match');
+        flipped_cards[1].classList.toggle('match');
+        flipped_cards = [];
+
+    }
+    else {
+        console.log('Not a match :-(');
+        setTimeout(() => {
+            flipCard(flipped_cards[0]);
+            flipCard(flipped_cards[1]);
+            flipped_cards = [];
+        }, 1000);
+
+    }
 }
