@@ -1,7 +1,7 @@
 /*
  * Create a list that holds all of your cards
  */
-
+const cards = Array.from(document.querySelectorAll('.deck li'));
 
 /*
  * Display the cards on the page
@@ -9,6 +9,12 @@
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
+ shuffleDeck(cards); // Shuffle cards
+ 
+ 
+ function shuffleDeck(cards) {
+     const shuffledCards = shuffle(cards);
+ }
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -47,7 +53,6 @@ deck_of_cards.addEventListener('click', event => {
         addFlippedCard(clickTarget);
 
         if (flipped_cards.length === 2) {
-            console.log('2 cards!'); // Two cards picked by player.
             checkForMatch();
         }
     }
