@@ -1,20 +1,26 @@
 /*
  * Create a list that holds all of your cards
  */
-const cards = Array.from(document.querySelectorAll('.deck li'));
+const deck_of_cards = document.querySelector('.deck');
 
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
- */
- shuffleDeck(cards); // Shuffle cards
+ */ 
  
+function shuffleDeck() {
+    const cards = Array.from(document.querySelectorAll('.deck li'));
+    const shuffledCards = shuffle(cards);
+    
+    for (card of shuffledCards) {
+        deck_of_cards.appendChild(card);
+    }
+}
  
- function shuffleDeck(cards) {
-     const shuffledCards = shuffle(cards);
- }
+shuffleDeck(); // Shuffle cards
+
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -42,7 +48,6 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
-const deck_of_cards = document.querySelector('.deck');
 let flipped_cards = [];
 
 deck_of_cards.addEventListener('click', event => {
