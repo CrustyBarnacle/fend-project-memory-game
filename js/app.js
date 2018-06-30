@@ -1,7 +1,12 @@
 /*
  * Create a list that holds all of your cards
  */
-const deck_of_cards = document.querySelector('.deck');
+const deck_of_cards = document.querySelector('.deck'); // Our deck of cards
+const userMoves = document.querySelector('.moves'); // Move counter element
+
+let flipped_cards = []; // Array to hold two flipped cards to compare
+let moves = 0; // One move each time the user selects two cards to flip
+
 
 /*
  * Display the cards on the page
@@ -10,16 +15,22 @@ const deck_of_cards = document.querySelector('.deck');
  *   - add each card's HTML to the page
  */ 
  
-function shuffleDeck() {
-    const cards = Array.from(document.querySelectorAll('.deck li'));
-    const shuffledCards = shuffle(cards);
-    
-    for (card of shuffledCards) {
-        deck_of_cards.appendChild(card);
-    }
-}
  
-shuffleDeck(); // Shuffle cards
+shuffleDeck(); // Shuffle cards, then add newly shuffledCards to page
+
+// Start listening for clicks, test for matching pairs
+deck_of_cards.addEventListener('click', event => {
+    const clickTarget = event.target;
+
+    if (isClickValid(clickTarget)) {
+        flipCard(clickTarget);
+        addFlippedCard(clickTarget);
+
+        if (flipped_cards.length === 2) {
+            checkForMatch();
+        }
+    }
+});
 
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -38,30 +49,15 @@ function shuffle(array) {
 }
 
 
-/*
- * set up the event listener for a card. If a card is clicked:
- *  - display the card's symbol (put this functionality in another function that you call from this one)
- *  - add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
- *  - if the list already has another card, check to see if the two cards match
- *    + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
- *    + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
- *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
- *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
- */
-let flipped_cards = [];
-
-deck_of_cards.addEventListener('click', event => {
-    const clickTarget = event.target;
-
-    if (isClickValid(clickTarget)) {
-        flipCard(clickTarget);
-        addFlippedCard(clickTarget);
-
-        if (flipped_cards.length === 2) {
-            checkForMatch();
-        }
+function shuffleDeck() {
+    // We need to create an Array from the nodelist returned by querySelectorAll
+    const cards = Array.from(document.querySelectorAll('.deck li'));
+    const shuffledCards = shuffle(cards);
+    
+    for (card of shuffledCards) {
+        deck_of_cards.appendChild(card);
     }
-});
+}
 
 
 function isClickValid(clickTarget){
@@ -105,4 +101,10 @@ function checkForMatch() {
         }, 1000);
 
     }
+}
+
+
+function addMove() {
+    moves++;
+    userMoves.innerHTML = moves;
 }
