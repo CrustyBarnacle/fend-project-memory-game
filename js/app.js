@@ -17,6 +17,7 @@ let moves = 0; // One move each time the user selects two cards to flip
  
  
 shuffleDeck(); // Shuffle cards, then add newly shuffledCards to page
+userMoves.innerHTML = moves; // Moves shown set to zero
 
 // Start listening for clicks, test for matching pairs
 deck_of_cards.addEventListener('click', event => {
