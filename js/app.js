@@ -25,7 +25,7 @@ deck_of_cards.addEventListener('click', event => {
 
     if (isClickValid(clickTarget)) {
         flipCard(clickTarget);
-        addFlippedCard(clickTarget);
+        addFlippedCard(clickTarget); // TODO: move functinality to flipCard?
 
         if (flipped_cards.length === 2) {
             checkForMatch();
