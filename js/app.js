@@ -24,8 +24,7 @@ deck_of_cards.addEventListener('click', event => {
     const clickTarget = event.target;
 
     if (isClickValid(clickTarget)) {
-        flipCard(clickTarget);
-        addFlippedCard(clickTarget); // TODO: move functinality to flipCard?
+        flipCard(clickTarget); // Also adds to flipped_cards
 
         if (flipped_cards.length === 2) {
             checkForMatch();
@@ -75,12 +74,7 @@ function isClickValid(clickTarget){
 function flipCard(clickTarget) {
     clickTarget.classList.toggle('open');
     clickTarget.classList.toggle('show');
-}
-
-
-function addFlippedCard(clickTarget) {
-    flipped_cards.push(clickTarget);
-    console.log(flipped_cards);
+    flipped_cards.push(clickTarget); // Replaces addFlippedCard function and call.
 }
 
 
