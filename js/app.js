@@ -28,6 +28,7 @@ deck_of_cards.addEventListener('click', event => {
 
         if (flipped_cards.length === 2) {
             checkForMatch();
+            addMove();
         }
     }
 });
