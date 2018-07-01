@@ -104,3 +104,10 @@ function addMove() {
     moves++;
     userMoves.innerHTML = moves;
 }
+
+
+function updateScore() {
+    if (moves == 16 || moves == 24) {
+        // TODO: remove/hide star
+    }
+}
