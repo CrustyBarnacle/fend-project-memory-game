@@ -13,9 +13,9 @@ let moves = 0; // One move each time the user selects two cards to flip
  *   - shuffle the list of cards using the provided "shuffle" method below
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
- */ 
- 
- 
+ */
+
+
 shuffleDeck(); // Shuffle cards, then add newly shuffledCards to page
 userMoves.innerHTML = moves; // Moves shown set to zero
 
@@ -29,6 +29,7 @@ deck_of_cards.addEventListener('click', event => {
         if (flipped_cards.length === 2) {
             checkForMatch();
             addMove();
+            updateScore(); // Hide, "remove", stars at 10 and 18 moves.
         }
     }
 });
@@ -54,7 +55,7 @@ function shuffleDeck() {
     // We need to create an Array from the nodelist returned by querySelectorAll
     const cards = Array.from(document.querySelectorAll('.deck li'));
     const shuffledCards = shuffle(cards);
-    
+
     for (card of shuffledCards) {
         deck_of_cards.appendChild(card);
     }
@@ -107,7 +108,13 @@ function addMove() {
 
 
 function updateScore() {
-    if (moves == 16 || moves == 24) {
-        // TODO: remove/hide star
+    const stars = document.querySelectorAll('.stars li');
+    if (moves == 10 || moves == 18) {
+        for (star of stars) {
+          if (!star.classList.contains('hide')) {
+            star.classList.add('hide');
+            break;
+          }
+        }
     }
 }
