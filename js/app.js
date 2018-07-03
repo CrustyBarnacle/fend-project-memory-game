@@ -5,7 +5,8 @@ const deck_of_cards = document.querySelector('.deck'); // Our deck of cards
 const userMoves = document.querySelector('.moves'); // Move counter element
 
 let flipped_cards = []; // Array to hold two flipped cards to compare
-let moves = 0; // One move each time the user selects two cards to flip
+let moves, time = 0; // Track moves used and time spent
+let clockOff = true; // Clock (timer/display) is not started (still at 0:00)
 
 
 /*
