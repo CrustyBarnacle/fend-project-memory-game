@@ -5,8 +5,10 @@ const deck_of_cards = document.querySelector('.deck'); // Our deck of cards
 const userMoves = document.querySelector('.moves'); // Move counter element
 
 let flipped_cards = []; // Array to hold two flipped cards to compare
-let moves, time = 0; // Track moves used and time spent
+let moves = 0; // Track moves used and time spent
+let time = 0;
 let clockOff = true; // Clock (timer/display) is not started (still at 0:00)
+let clockId;
 
 
 /*
@@ -26,11 +28,15 @@ deck_of_cards.addEventListener('click', event => {
 
     if (isClickValid(clickTarget)) {
         flipCard(clickTarget); // Also adds to flipped_cards
+        if (clockOff) {
+          startClock(); // Also sets clockOff = false;
+        }
 
         if (flipped_cards.length === 2) {
             checkForMatch();
             addMove();
             updateScore(); // Hide, "remove", stars at 10 and 18 moves.
+            displayTime();
         }
     }
 });
@@ -58,7 +64,7 @@ function shuffleDeck() {
     const shuffledCards = shuffle(cards);
 
     for (card of shuffledCards) {
-        deck_of_cards.appendChild(card);
+        deck_of_cards.appendChild(card); // Add cards to page
     }
 }
 
@@ -118,4 +124,30 @@ function updateScore() {
           }
         }
     }
+}
+
+// Clock/timer functions
+function startClock() {
+    clockOff = false;
+    clockId = setInterval(() => {
+      time++;
+    }, 1000);
+}
+
+
+function displayTime() {
+    const timer = document.querySelector('.timer');
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+
+    if (seconds < 10) {
+        timer.innerHTML = `${minutes}:0${seconds}`;
+    } else {
+        timer.innerHTML = `${minutes}:${seconds}`;
+    }
+}
+
+
+function stopClock() {
+    clearInterval(clockId);
 }
