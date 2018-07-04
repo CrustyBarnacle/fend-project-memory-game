@@ -9,6 +9,7 @@ let moves = 0; // Track moves used and time spent
 let time = 0;
 let clockOff = true; // Clock (timer/display) is not started (still at 0:00)
 let clockId;
+let score_stars = 3; // Starting number of stars
 
 
 /*
@@ -117,6 +118,7 @@ function addMove() {
 function updateScore() {
     const stars = document.querySelectorAll('.stars li');
     if (moves == 10 || moves == 18) {
+        score_stars--;
         for (star of stars) {
           if (!star.classList.contains('hide')) {
             star.classList.add('hide');
@@ -151,3 +153,31 @@ function displayTime() {
 function stopClock() {
     clearInterval(clockId);
 }
+
+// Modal functions
+function toggleModal() {
+    const modal = document.querySelector('.modal_background');
+    modal.classList.toggle('hide');
+}
+
+
+function writeModalStats() {
+    const timeStat = document.querySelector('.modal_time');
+    const clockTime = document.querySelector('.timer').innerHTML;
+    const movesStat = document.querySelector('.modal_moves');
+    const starsStat = document.querySelector('.modal_stars');
+    
+    timeStat.innerHTML = `Time | ${clockTime}`;
+    movesStat.innerHTML = `Move | ${moves}`;
+    starsStat.innerHTML = `Stars | ${score_stars}`;
+}
+
+
+// Modal event listeners
+document.querySelector('.modal_cancel').addEventListener('click', () => {
+    toggleModal();
+});
+
+document.querySelector('.modal_replay').addEventListener('click', () => {
+    // TODO: call game reset functon
+})
