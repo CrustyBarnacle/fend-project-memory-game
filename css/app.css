@@ -99,6 +99,7 @@ h1 {
   width: 400px;
   top: 50%;
   left: 50%;
+  border-radius: 10px;
   background: #fff url('../img/qbkls.png'); /* Background pattern from Subtle Patterns */
   transform: translate(-50%, -65%);
 }
@@ -108,7 +109,7 @@ h1 {
   justify-content: space-between;
   align-items: center;
   padding: 0 1.5rem;
-  border-bottom: 1px solid gray;
+  border-bottom: 2px solid gray;
 }
 
 .modal_close {
@@ -121,7 +122,7 @@ h1 {
   flex-direction: column;
   align-items: center;
   padding: 1rem;
-  border-bottom: 1px solid gray;
+  border-bottom: 2px solid gray;
 }
 
 .modal_buttons {
