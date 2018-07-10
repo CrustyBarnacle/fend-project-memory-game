@@ -155,7 +155,7 @@ function stopClock() {
 }
 
 // Modal functions
-function toggleModal() {
+function toggleModal() { // Update to use https://sweetalert2.github.io/ ?
     const modal = document.querySelector('.modal_background');
     modal.classList.toggle('hide');
 }
@@ -166,7 +166,7 @@ function writeModalStats() {
     const clockTime = document.querySelector('.timer').innerHTML;
     const movesStat = document.querySelector('.modal_moves');
     const starsStat = document.querySelector('.modal_stars');
-    
+
     timeStat.innerHTML = `Time | ${clockTime}`;
     movesStat.innerHTML = `Move | ${moves}`;
     starsStat.innerHTML = `Stars | ${score_stars}`;
