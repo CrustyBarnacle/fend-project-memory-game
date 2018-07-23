@@ -174,10 +174,37 @@ function writeModalStats() {
 
 
 // Modal event listeners
-document.querySelector('.modal_cancel').addEventListener('click', () => {
-    toggleModal();
-});
+document.querySelector('.modal_cancel').addEventListener('click', toggleModal);
+document.querySelector('.modal_replay').addEventListener('click', resetGame);
+document.querySelector('.restart').addEventListener('click', resetGame);
 
-document.querySelector('.modal_replay').addEventListener('click', () => {
-    // TODO: call game reset functon
-})
+
+// Reset the Game. Reset timer, moves, stars, and shuffles the deck.
+function resetGame() {
+    resetTimer();
+    resetMoves();
+    resetStars();
+    shuffleDeck();
+}
+
+
+function resetTimer() {
+    stopClock();
+    clockOff = true;
+    time = 0;
+    displayTime();
+}
+
+function resetMoves () {
+    moves = 0;
+    document.querySelector('.moves').innerHTML = moves;
+}
+
+
+function resetStars() {
+    stars = 0;
+    const stars = document.querySelectorAll('.stars li');
+    for (star of stars) {
+        star.classList.remove('hide');
+    }
+}
