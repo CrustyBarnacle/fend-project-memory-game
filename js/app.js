@@ -117,7 +117,7 @@ function addMove() {
 
 function updateScore() {
     const stars = document.querySelectorAll('.stars li');
-    if (moves == 10 || moves == 18) {
+    if (moves == 15 || moves == 24) {
         score_stars--;
         for (star of stars) {
           if (!star.classList.contains('hide')) {
