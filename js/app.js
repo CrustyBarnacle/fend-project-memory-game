@@ -193,6 +193,7 @@ document.querySelector('.restart').addEventListener('click', () => {
 
 // Reset the Game. Reset timer, moves, stars, and shuffles the deck.
 function resetGame() {
+    matched = 0;
     resetTimer();
     resetMoves();
     resetStars();
