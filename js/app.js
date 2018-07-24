@@ -3,9 +3,11 @@
  */
 const deck_of_cards = document.querySelector('.deck'); // Our deck of cards
 const userMoves = document.querySelector('.moves'); // Move counter element
+const TOTAL_PAIRS = 8;
 
 let flipped_cards = []; // Array to hold two flipped cards to compare
 let moves = 0; // Track moves used and time spent
+let matched = 0; // Number of matched pairs
 let time = 0;
 let clockOff = true; // Clock (timer/display) is not started (still at 0:00)
 let clockId;
@@ -38,6 +40,10 @@ deck_of_cards.addEventListener('click', event => {
             addMove();
             updateScore(); // Hide, "remove", stars at 10 and 18 moves.
             displayTime();
+        }
+        
+        if (matched === TOTAL_PAIRS) {
+            gameOver();
         }
     }
 });
@@ -95,6 +101,7 @@ function checkForMatch() {
             flipped_cards[0].classList.toggle('match');
             flipped_cards[1].classList.toggle('match');
             flipped_cards = [];
+            matched++;
     }
 
     else {
@@ -117,7 +124,7 @@ function addMove() {
 
 function updateScore() {
     const stars = document.querySelectorAll('.stars li');
-    if (moves == 15 || moves == 24) {
+    if (moves == 14 || moves == 22) {
         score_stars--;
         for (star of stars) {
           if (!star.classList.contains('hide')) {
@@ -174,9 +181,9 @@ function writeModalStats() {
 
 
 // Modal event listeners
-document.querySelector('.modal_cancel').addEventListener('click', toggleModal);
-document.querySelector('.modal_replay').addEventListener('click', resetGame);
-document.querySelector('.restart').addEventListener('click', resetGame);
+document.querySelector('.modal_cancel').addEventListener('click', )
+document.querySelector('.modal_replay').addEventListener('click', resetGame())
+document.querySelector('.restart').addEventListener('click', resetGame());
 
 
 // Reset the Game. Reset timer, moves, stars, and shuffles the deck.
@@ -202,9 +209,17 @@ function resetMoves () {
 
 
 function resetStars() {
-    stars = 0;
+    score_stars = 0;
     const stars = document.querySelectorAll('.stars li');
     for (star of stars) {
         star.classList.remove('hide');
     }
+}
+
+
+// Game Over - All pairs matched
+function gameOver() {
+    stopClock();
+    writeModalStats();
+    toggleModal();
 }
