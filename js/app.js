@@ -13,7 +13,6 @@ let clockOff = true; // Clock (timer/display) is not started (still at 0:00)
 let clockId;
 let score_stars = 3; // Starting number of stars
 
-
 /*
  * Display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
@@ -181,9 +180,15 @@ function writeModalStats() {
 
 
 // Modal event listeners
-document.querySelector('.modal_cancel').addEventListener('click', )
-document.querySelector('.modal_replay').addEventListener('click', resetGame())
-document.querySelector('.restart').addEventListener('click', resetGame());
+document.querySelector('.modal_cancel').addEventListener('click', () => {
+    toggleModal();
+});
+document.querySelector('.modal_replay').addEventListener('click', () => {
+    replayGame();
+});
+document.querySelector('.restart').addEventListener('click', () => {
+    resetGame();
+});
 
 
 // Reset the Game. Reset timer, moves, stars, and shuffles the deck.
@@ -194,6 +199,11 @@ function resetGame() {
     shuffleDeck();
 }
 
+function replayGame() {
+    resetGame();
+    toggleModal();
+}
+
 
 function resetTimer() {
     stopClock();
@@ -201,6 +211,7 @@ function resetTimer() {
     time = 0;
     displayTime();
 }
+
 
 function resetMoves () {
     moves = 0;
