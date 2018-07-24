@@ -196,6 +196,7 @@ function resetGame() {
     resetTimer();
     resetMoves();
     resetStars();
+    resetCards();
     shuffleDeck();
 }
 
@@ -227,6 +228,13 @@ function resetStars() {
     }
 }
 
+
+function resetCards() {
+    const cards = document.querySelectorAll('.deck li');
+    for (card of cards) {
+        card.className = 'card';
+    }
+}
 
 // Game Over - All pairs matched
 function gameOver() {
