@@ -38,9 +38,8 @@ deck_of_cards.addEventListener('click', event => {
             checkForMatch();
             addMove();
             updateScore(); // Hide, "remove", stars at 10 and 18 moves.
-            displayTime();
         }
-        
+
         if (matched === TOTAL_PAIRS) {
             gameOver();
         }
@@ -139,6 +138,7 @@ function startClock() {
     clockOff = false;
     clockId = setInterval(() => {
       time++;
+      displayTime();
     }, 1000);
 }
 
